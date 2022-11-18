@@ -22,3 +22,19 @@ from functools import partial
 import clip
 from einops import rearrange, repeat
 from transformers import CLIPTokenizer, CLIPTextModel
+
+
+def Root():
+    models_path = "models" 
+    configs_path = "configs" 
+    output_path = "output" 
+    mount_google_drive = True 
+    models_path_gdrive = "/content/drive/MyDrive/AI/models" 
+    output_path_gdrive = "/content/drive/MyDrive/AI/StableDiffusion" 
+
+    # copy models to /content
+    if mount_google_drive:
+        !cp -r 
+        !cp -r $output_path_gdrive/* 
+
+    
