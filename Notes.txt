@@ -1,0 +1,24 @@
+in https://github.com/CompVis/stable-diffusion/blob/ce05de28194041e030ccfc70c635fe3707cdfc30/ldm/modules/encoders/modules.py:
+
+def __init__(self, version="openai/clip-vit-large-patch14", device="cuda", max_length=77):
+    super().__init__()
+    self.tokenizer = CLIPTokenizer.from_pretrained(version)
+    self.transformer = CLIPTextModel.from_pretrained(version)
+    self.device = device
+    self.max_length = max_length
+    self.freeze()
+    
+def forward(self, text):
+    batch_encoding = self.tokenizer(text, truncation=True, max_length=self.max_length, return_length=True,
+                                    return_overflowing_tokens=False, padding="max_length", return_tensors="pt")
+    tokens = batch_encoding["input_ids"].to(self.device)
+    outputs = self.transformer(input_ids=tokens)
+
+> Uses openai/clip-vit-large-patch14 (huggingface), final hidden state 
+
+import torch
+import torch.nn as nn
+from functools import partial
+import clip
+from einops import rearrange, repeat
+from transformers import CLIPTokenizer, CLIPTextModel
