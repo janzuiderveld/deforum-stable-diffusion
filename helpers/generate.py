@@ -194,6 +194,7 @@ def generate(args, root, frame = 0, return_latent=False, return_sample=False, re
                                     verbose=False)
 
     # HERE pipeline passes
+    print("&&&&&&&&&&&&&&&&&&&&&"*10)
     results = []
     with torch.no_grad():
         with precision_scope("cuda"):
