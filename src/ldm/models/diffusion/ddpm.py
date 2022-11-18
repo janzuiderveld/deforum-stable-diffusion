@@ -565,7 +565,6 @@ class LatentDiffusion(DDPM):
             assert hasattr(self.cond_stage_model, self.cond_stage_forward)
             c = getattr(self.cond_stage_model, self.cond_stage_forward)(c)
             
-        print("[!!!!!]"*100)
         input(f"shape of c: {c.shape}")
         return c
 
