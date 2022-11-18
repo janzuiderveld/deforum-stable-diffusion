@@ -572,7 +572,7 @@ class LatentDiffusion(DDPM):
             
             print(4)
             
-        print("[****]"*100)
+        print("[!!!!!]"*100)
         input(c)
         return c
 
