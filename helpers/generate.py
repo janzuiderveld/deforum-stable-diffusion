@@ -26,9 +26,8 @@ from .load_images import load_img, load_mask_latent, prepare_mask, prepare_overl
 def add_noise(sample: torch.Tensor, noise_amt: float) -> torch.Tensor:
     return sample + torch.randn(sample.shape, device=sample.device) * noise_amt
 
-def get_conditioning_tensor(args, root)
+def get_conditioning_tensor(args, root):
     seed_everything(args.seed)
-
 
 def generate(args, root, frame = 0, return_latent=False, return_sample=False, return_c=False):
     seed_everything(args.seed)
