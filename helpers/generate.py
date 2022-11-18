@@ -189,6 +189,8 @@ def generate(args, root, frame = 0, return_latent=False, return_sample=False, re
                                     grad_consolidate_fn=None, # function to add grad to image fn(img, grad, sigma)
                                     verbose=False)
 
+    print("$$$$$$$$$$$$"*10)
+    input()
     results = []
     with torch.no_grad():
         with precision_scope("cuda"):
