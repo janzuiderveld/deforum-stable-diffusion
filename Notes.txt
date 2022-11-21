@@ -38,3 +38,18 @@ def Root():
         !cp -r $output_path_gdrive/* 
 
     
+
+
+Mapping Image final hidden to text final hidden? 
+> Needs dataset of CLIP vit L Images and text
+> Or, maybe quite simple..? mapping to shared representation is known, can we use that?
+
+Textual Inversion
+https://github.com/7eu7d7/DreamArtist-stable-diffusion
+> Is it fast enough?
+
+Image captioning?
+> https://github.com/tgisaturday/BITTERS
+
+> https://colab.research.google.com/drive/1Jgj0uaALtile2iyqlN1r72UYRe9SZw-H?usp=sharing#scrollTo=m5jPDsEA5Kub
+> .. Meh
