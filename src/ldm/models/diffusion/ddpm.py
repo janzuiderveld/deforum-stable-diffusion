@@ -556,7 +556,7 @@ class LatentDiffusion(DDPM):
                 # HERE WE HAVE TO EDIT Embedding
                 c = torch.load('deforum-stable-diffusion/txt.pt').to(self.device)[0, :, :].unsqueeze(0)
 
-                c = self.cond_stage_model.encode(c)
+                # c = self.cond_stage_model.encode(c)
 
                 if isinstance(c, DiagonalGaussianDistribution):
                     c = c.mode()
