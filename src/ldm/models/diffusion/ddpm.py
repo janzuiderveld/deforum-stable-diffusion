@@ -555,8 +555,8 @@ class LatentDiffusion(DDPM):
             if hasattr(self.cond_stage_model, 'encode') and callable(self.cond_stage_model.encode):
                 
                 # c can come in this format: "!{index}!filename.pt"
-                if c.startswith("!"):
-                    c = c.split("!")
+                if c[0].startswith("!"):
+                    c = c[0].split("!")
                     # HERE WE HAVE TO EDIT Embedding
                     c = torch.load(f'deforum-stable-diffusion/{c[2]}').to(self.device)[int(c[1]), :, :].unsqueeze(0)
                 else:
