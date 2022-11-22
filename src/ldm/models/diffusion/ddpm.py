@@ -549,13 +549,14 @@ class LatentDiffusion(DDPM):
             raise NotImplementedError(f"encoder_posterior of type '{type(encoder_posterior)}' not yet implemented")
         return self.scale_factor * z
 
-    def get_learned_conditioning(self, c):
+    def get_learned_conditioning(
+        self, c):
         if self.cond_stage_forward is None:
             if hasattr(self.cond_stage_model, 'encode') and callable(self.cond_stage_model.encode):
                 # HERE WE HAVE TO EDIT Embedding
-                c = torch.load('deforum-stable-diffusion/sample.pt').to(self.device)[0, :, :].unsqueeze(0)
+                c = torch.load('deforum-stable-diffusion/txt.pt').to(self.device)[0, :, :].unsqueeze(0)
 
-                # c = self.cond_stage_model.encode(c)
+                c = self.cond_stage_model.encode(c)
 
                 if isinstance(c, DiagonalGaussianDistribution):
                     c = c.mode()
@@ -567,7 +568,7 @@ class LatentDiffusion(DDPM):
             assert hasattr(self.cond_stage_model, self.cond_stage_forward)
             c = getattr(self.cond_stage_model, self.cond_stage_forward)(c)
             
-        input(f"shape of c: {c.shape}")
+        # input(f"shape of c: {c.shape}")
         return c
 
     def meshgrid(self, h, w):
