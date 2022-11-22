@@ -546,7 +546,8 @@ class LatentDiffusion(DDPM):
         elif isinstance(encoder_posterior, torch.Tensor):
             z = encoder_posterior
         else:
-            raise NotImplementedError(f"encoder_posterior of type '{type(encoder_posterior)}' not yet implemented")
+            z = encoder_posterior.sample()
+            # raise NotImplementedError(f"encoder_posterior of type '{type(encoder_posterior)}' not yet implemented")
         return self.scale_factor * z
 
     def get_learned_conditioning(
