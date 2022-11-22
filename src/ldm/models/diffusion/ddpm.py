@@ -553,10 +553,14 @@ class LatentDiffusion(DDPM):
         self, c):
         if self.cond_stage_forward is None:
             if hasattr(self.cond_stage_model, 'encode') and callable(self.cond_stage_model.encode):
-                # HERE WE HAVE TO EDIT Embedding
-                c = torch.load('deforum-stable-diffusion/txt.pt').to(self.device)[0, :, :].unsqueeze(0)
-
-                # c = self.cond_stage_model.encode(c)
+                
+                # c can come in this format: "!{index}!filename.pt"
+                if c.startswith("!"):
+                    c = c.split("!")
+                    # HERE WE HAVE TO EDIT Embedding
+                    c = torch.load(f'deforum-stable-diffusion/{c[2]}').to(self.device)[int(c[1]), :, :].unsqueeze(0)
+                else:
+                    c = self.cond_stage_model.encode(c)
 
                 if isinstance(c, DiagonalGaussianDistribution):
                     c = c.mode()
