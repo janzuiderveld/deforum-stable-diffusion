@@ -74,8 +74,9 @@ def make_clip_loss_fn(root, args):
     if args.clip_prompt.startswith("!"):
         fn = args.clip_prompt.split("!")[2]
         print(fn)
-        target_embeds = torch.load(f'deforum-stable-diffusion/{fn}_clip.pt').to("cuda")
+        target_embeds = torch.load(f'deforum-stable-diffusion/{fn}c').to("cuda")
         print(target_embeds.shape)
+        weigths = torch.ones(target_embeds.shape[0]).to("cuda")
     else:
         target_embeds, weights = parse_clip_prompts(args.clip_prompt)
 
