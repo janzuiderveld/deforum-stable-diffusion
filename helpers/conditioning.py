@@ -71,7 +71,13 @@ def make_clip_loss_fn(root, args):
                           std=[0.26862954, 0.26130258, 0.27577711])
 
     make_cutouts = MakeCutouts(clip_size, args.cutn, args.cut_pow)
-    target_embeds, weights = parse_clip_prompts(args.clip_prompt)
+    if args.clip_prompt.startswith("!"):
+        fn = args.clip_prompt.split("!")[2]
+        print(fn)
+        target_embeds = torch.load(f'deforum-stable-diffusion/{fn}_clip.pt').to("cuda")
+        print(target_embeds.shape)
+    else:
+        target_embeds, weights = parse_clip_prompts(args.clip_prompt)
 
     def clip_loss_fn(x, sigma, **kwargs):
         nonlocal target_embeds, weights, make_cutouts, normalize
